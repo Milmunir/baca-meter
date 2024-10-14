@@ -1,0 +1,8 @@
+To Do List
+
+List Pelanggan :
+Container (PC)
+
+Pelanggan :
+margin xs-2 (Mobile)
+Tampilan Pc

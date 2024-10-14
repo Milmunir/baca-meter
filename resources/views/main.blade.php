@@ -1,0 +1,63 @@
+<head>
+    <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Delta Tirta</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Upload</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Download</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Hapus Semua Data</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        @foreach ($jalan as $key)
+        <div class="container shadow my-2 bg-white rounded col-lg-6" onclick="location.href = 'List_pel.html'" style="cursor: pointer;">
+            <div class="col">
+                <div class="row">
+                    <div class="col-10">
+                        <h1>{{$key->namajalan}}</h1>
+                    </div>
+                    <div class="col-2 align-self-center py-0 text-center">
+                      <h5>0/{{$key->jumlah}}</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <h5>{{$key->idcabang}}/{{$key->idwilayah}}/{{$key->idjalan}}</h5>
+                    </div>
+                    <div class="col-2 align-self-center text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+
+      </div>
+    </div>
+</body>
