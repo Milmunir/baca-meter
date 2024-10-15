@@ -18,6 +18,9 @@ class userController extends Controller
 
     public function login(Request $request)
     {
+        if ($request->isMethod('get')) {
+            return view('login');
+        }
         try {
             $validated = $request->validate([
                 'namauser' => 'required|string',
@@ -40,7 +43,7 @@ class userController extends Controller
                 return response()->json(['token' => $token], 200);
             }
             if ($request->is('login')) {
-                return redirect('/your-custom-url')->cookie($cookie);
+                return redirect('/jalan')->cookie($cookie);
             }
         } catch (QueryException $th) {
             return response()->json(['error' => 'Database error', 'message' => $th], 200);

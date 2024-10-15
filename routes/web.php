@@ -24,6 +24,7 @@ Route::get('/main', function () {
 Route::get('/bacaan', [Controller::class, 'getBacaan']);
 Route::get('/jalan', [Controller::class, 'getJalan']);
 Route::get('/detail/{id}', [Controller::class, 'getBacaan']);
+Route::get('/login', [userController::class, 'login']);
 Route::post('/login', [userController::class, 'login']);
 
 

@@ -18,23 +18,27 @@
         </div>
     </div>
     
-    <form class="container mt-4" action="/action_page.php">
+    <form class="container mt-4" action="login" method="POST">
+        @csrf
         <div class="row justify-content-center">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="uname" class="form-control lg-input" id="uname" placeholder="Jane">
+                <label for="namauser">Username</label>
+                <input type="text" name="namauser" class="form-control lg-input" id="uname" placeholder="Nama User">
             </div>
         </div>
 
         <div class="row justify-content-center">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="form-control lg-input" id="password" placeholder="doe">
+                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Nama User">
             </div>
         </div>
+        {{-- @error($e)
+            {{$e}}
+        @enderror --}}
         <div class="row justify-content-center"></div>
             <div class="row mx-4">
-                <button type="button" class="btn btn-primary btn-lg btn-block logbtn" onclick="location.href = 'main.html'">Masuk</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block logbtn">Masuk</button>
             </div>
         </div>
     </form> 
