@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/', [userController::class, 'index']);
+Route::post('/login', [userController::class, 'login']);
 Route::post('/upstan', [Controller::class, 'uploadStanMeter']);
 Route::get('/jalan', [Controller::class, 'getJalan']);
 Route::get('/bacaan', [Controller::class, 'getBacaan']);

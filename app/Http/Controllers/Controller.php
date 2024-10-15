@@ -24,7 +24,7 @@ class Controller extends BaseController
             if ($url == 'jalan') {
                 return view('/main', ['jalan' => $jalan]);
             }
-            return response()->json(['jalan' => $jalan], 200);
+            return response()->json(['jalan' => $request->header()], 200);
         } catch (QueryException $th) {
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
         }
@@ -32,6 +32,7 @@ class Controller extends BaseController
 
     public function uploadStanMeter(Request $request)
     {
+        $path = env('FILE_IMAGE_PATH');
         try {
             $validated = $request->validate([
                 'bulan' => 'required|integer',
@@ -39,6 +40,7 @@ class Controller extends BaseController
                 'nosambungan' => 'required|string',
                 'stan' => 'required|integer', //adanya kolom stan di tabel stanmeter
                 'pakai' => 'required|integer',
+                'pakairata' => 'required|integer',
                 'idcatatan' => 'required|integer',
                 'lat' => 'required|string',
                 'long' => 'required|string',
@@ -46,13 +48,15 @@ class Controller extends BaseController
                 'iduser' => 'required|string',
                 'foto' => 'required|file|image'
             ]);
-            $validated['foto'] = $request->file('foto')->store('public/img');
-            
+            // $validated['foto'] = $request->file('foto')->store($path);
+            $result = DB::update("UPDATE stanmeter SET tglbaca = '" . $validated['tglbaca'] . "', stan =  " . $validated['stan'] . ",pakai = " . $validated['pakai'] . ", pakairata = " . $validated['pakairata'] . ", idcatatan = " . $validated['idcatatan'] . ", iduser = " . $validated['iduser'] . ", lat = '" . $validated['lat'] . "', lon = '" . $validated['long'] . "', foto = '" . $validated['foto'] . "', path_foto = '" . $path . "' WHERE tahun = " . $validated['tahun'] . " AND bulan = " . $validated['bulan'] . " AND nosambungan = '" . $validated['nosambungan'] . "'");
             return response()->json(['message' => $validated], 200);
         } catch (ValidationException $th) {
             return response()->json(['error' => 'validation error', 'messages' => $th->errors()], 422);
-        } catch (Throwable $th) {
-            return response()->json(['error' => 'validation error', 'messages' => $th], 500);
+        // } catch (Throwable $th) {
+        //     return response()->json(['error' => 'Something goes wrong', 'messages' => $th], 500);
+        } catch (QueryException $th) {
+            return response()->json(['error' => 'Database goes wrong', 'messages' => $th], 500);
         }
     }
     public function getJadwal(Request $request)
@@ -70,13 +74,14 @@ class Controller extends BaseController
         $bulan = date("m");
         $tahun = date("Y");
         $tanggal = date("Y-m-d");
-        $idpembacameter = 10;
+        $idpembacameter = $request->cookie('access_token');
+        
         $ids = base64_decode($id);
         $ids = str_replace(['\\/'], ['/'], $ids);
-        // echo $ids;
+        //echo $ids;
         //Ambil id jika membuka detail
         if ($request->is('detail/*') || $request->is('api/detail/*')) {
-            $query = "AND p.nosambungan = '". $ids ."'";
+            $query = "AND p.nosambungan = '" . $ids . "'";
             // return response()->json(['datas' => $ids], 200);
         }
         // echo $ids;
@@ -88,7 +93,8 @@ class Controller extends BaseController
             //     'tanggal' => 'required|date',
             //     'idpembacameter' => 'required|integer'
             // ]);
-            $data = DB::select("SELECT 
+            $data = DB::select(
+                "SELECT 
                     p.nosambungan,
                     p.nama,
                     CONCAT(p.alamat, ' ', p.noalamat) AS alamat,
@@ -141,23 +147,24 @@ class Controller extends BaseController
                     AND pm.idpembacameter = '" . $idpembacameter . "'
                     AND s.stan = '-1'
                     AND p.urutbaca != 0
-                    AND s.isaccepted = 0;"
-                );
+                    AND s.isaccepted = 0
+                ORDER BY p.nosambungan;"
+            );
             //Jika membuka list pelanggan
             if ($request->is('detail/*')) {
-                return view('/detail',['data' => $data, 'nosambungan'=> $ids]);
+                return view('/detail', ['data' => $data, 'nosambungan' => $ids]);
             }
             if ($request->is('api/detail/*')) {
-                return response()->json(['data' => $data, 'nosambungan'=> $ids], 200);
+                return response()->json(['data' => $data, 'nosambungan' => $ids], 200);
             }
             if ($request->path() == 'bacaan') {
-                return view('/pelanggan',['pelanggan' => $data]);
+                return view('/pelanggan', ['pelanggan' => $data]);
             }
             if ($request->is('api/*')) {
                 return response()->json(['data' => $data], 200);
             }
             //Jika membuka detail pelanggan
-            return view('/pelanggan',['pelanggan' => $data]);
+            return view('/pelanggan', ['pelanggan' => $data]);
         } catch (QueryException $th) {
             echo $th;
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
@@ -165,7 +172,5 @@ class Controller extends BaseController
             return response()->json(['error' => 'Validation error', 'message' => $th->errors()], 422);
         }
     }
-    public function updateBacaan(Request $request, string $id){
-
-    }
+    public function updateBacaan(Request $request, string $id) {}
 }

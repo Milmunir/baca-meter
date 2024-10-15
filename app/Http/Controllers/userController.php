@@ -2,62 +2,61 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class userController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = DB::select("SELECT a.* FROM rekening.user a");
-        return response()->json(['user'=>$user], 200);
+        return response()->json(['user' => $user], 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function login(Request $request)
     {
-        //
+        try {
+            $validated = $request->validate([
+                'namauser' => 'required|string',
+                'password' => 'required|string'
+            ]);
+            $result = DB::select("SELECT idpembacameter,namauser,password3 FROM rekening.user WHERE idpembacameter IS NOT NULL AND namauser = '" . $validated['namauser'] . "' AND password3 = '" . $validated['password'] . "' ");
+            if (!$result) {
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+            $payload = JWTAuth::factory()->customClaims([
+                'sub' => $result[0]->idpembacameter,  // User ID or some unique identifier
+                'namauser' => $result[0]->namauser,
+                'iat' => now()->timestamp,  // Issued at time
+                'exp' => now()->addMinutes(60)->timestamp // Expiration time (e.g., 1 hour)
+            ])->make();
+            $token = JWTAuth::encode($payload)->get();
+            // echo $token;
+            $cookie = cookie('access_token', $token, 60, '/', null, false, true); // ojo lali ganti ndek true pas production
+            if ($request->is('api/login')) {
+                return response()->json(['token' => $token], 200);
+            }
+            if ($request->is('login')) {
+                return redirect('/your-custom-url')->cookie($cookie);
+            }
+        } catch (QueryException $th) {
+            return response()->json(['error' => 'Database error', 'message' => $th], 200);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

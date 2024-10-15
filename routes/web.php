@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +24,8 @@ Route::get('/main', function () {
 Route::get('/bacaan', [Controller::class, 'getBacaan']);
 Route::get('/jalan', [Controller::class, 'getJalan']);
 Route::get('/detail/{id}', [Controller::class, 'getBacaan']);
+Route::post('/login', [userController::class, 'login']);
+
 
 
 
