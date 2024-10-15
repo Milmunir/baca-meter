@@ -15,16 +15,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/', [userController::class, 'index']);
 Route::post('/login', [userController::class, 'login']);
-Route::post('/upstan', [Controller::class, 'uploadStanMeter']);
-Route::get('/jalan', [Controller::class, 'getJalan']);
-Route::get('/bacaan', [Controller::class, 'getBacaan']);
-Route::get('/detail/{id?}', [Controller::class, 'getBacaan']);
-Route::get('/jadwal', [Controller::class, 'getJadwal']);
-Route::post('/upbaca', [Controller::class, 'uploadStanMeter']);
+
+Route::middleware(['jwtAuth:api'])->group(function () {
+    Route::get('/jalan', [Controller::class, 'getJalan']);
+    Route::post('/upstan', [Controller::class, 'uploadStanMeter']);
+    Route::get('/bacaan', [Controller::class, 'getBacaan']);
+    Route::get('/detail/{id?}', [Controller::class, 'getBacaan']);
+    Route::get('/jadwal', [Controller::class, 'getJadwal']);
+    Route::post('/upbaca', [Controller::class, 'uploadStanMeter']);
+});
