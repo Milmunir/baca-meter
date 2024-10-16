@@ -39,7 +39,7 @@
 
             @foreach ($pelanggan as $key)
                 <div class="container main_container shadow px-4 py-2 my-2 mx-sm-auto my-sm-2 rounded col-12" 
-                onclick="location.href = 'detail/{{base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
+                onclick="location.href = '{{Request::url().'/detail/'.base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
                     <div class="row">
                         <div class="d-none d-lg-block col-lg-1 px-md-auto my-md-auto Jadoel">
                             <h4>1</h4>

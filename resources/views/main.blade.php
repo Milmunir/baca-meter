@@ -33,7 +33,7 @@
 
         
         @foreach ($jalan as $key)
-        <div class="container main_container pb-2 shadow my-2 rounded pt-md-2" onclick="location.href = 'List_pel.html'" style="cursor: pointer;">
+        <div class="container main_container pb-2 shadow my-2 rounded pt-md-2" onclick="location.href = '/bacaan/{{$key->idjalan}}'" style="cursor: pointer;">
           <div class="row">
               <div class="d-none d-md-block col-md-1 px-md-auto my-md-auto Jadoel">
                 <h4>{{ $loop->iteration }}</h4>
