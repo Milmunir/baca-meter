@@ -22,7 +22,7 @@
     </nav>
     @foreach ($pelanggan as $key)
         <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded"
-            onclick="location.href = 'detail/{{base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
+            onclick="location.href = '{{Request::url().'/detail/'.base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
             <div class="row">
                 <div class="col-2 p-0">
                     <img src="../reeesource/PP.jpg" style="height: 100%;" class="ratio ratio-1x1" alt="">

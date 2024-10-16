@@ -20,9 +20,10 @@ Route::post('/login', [userController::class, 'login']);
 
 Route::middleware(['jwtAuth:api'])->group(function () {
     Route::get('/jalan', [Controller::class, 'getJalan']);
+    Route::get('/bacaan/{jalan?}', [Controller::class, 'getJalan']);
     Route::post('/upstan', [Controller::class, 'uploadStanMeter']);
-    Route::get('/bacaan', [Controller::class, 'getBacaan']);
-    Route::get('/detail/{id?}', [Controller::class, 'getBacaan']);
+    // Route::get('/bacaan', [Controller::class, 'getBacaan']);
+    Route::get('/bacaan/{jalan}/detail/{id?}', [Controller::class, 'getBacaan']);
     Route::get('/jadwal', [Controller::class, 'getJadwal']);
     Route::post('/upbaca', [Controller::class, 'uploadStanMeter']);
 });

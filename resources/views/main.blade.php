@@ -34,7 +34,7 @@
     <div class="container">
       <div class="row">
         @foreach ($jalan as $key)
-        <div class="container shadow my-2 bg-white rounded col-lg-6" onclick="location.href = 'List_pel.html'" style="cursor: pointer;">
+        <div class="container shadow my-2 bg-white rounded col-lg-6" onclick="location.href = '/bacaan/{{$key->idjalan}}'" style="cursor: pointer;">
             <div class="col">
                 <div class="row">
                     <div class="col-10">

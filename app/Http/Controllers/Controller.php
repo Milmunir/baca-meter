@@ -11,27 +11,25 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Throwable;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function getJalan(Request $request)
-    {
+    public function getJalan(Request $request){
         $url = $request->path();
         try {
             $jalan = DB::select("SELECT a.* FROM rekening.jalan a ORDER BY idcabang,idwilayah,idjalan");
             if ($url == 'jalan') {
                 return view('/main', ['jalan' => $jalan]);
             }
-            return response()->json(['jalan' => $request->header()], 200);
+            return response()->json(['jalan' => $jalan], 200);
         } catch (QueryException $th) {
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
         }
     }
-
-    public function uploadStanMeter(Request $request)
-    {
+    public function uploadStanMeter(Request $request){
         $path = env('FILE_IMAGE_PATH');
         try {
             $validated = $request->validate([
@@ -59,8 +57,7 @@ class Controller extends BaseController
             return response()->json(['error' => 'Database goes wrong', 'messages' => $th], 500);
         }
     }
-    public function getJadwal(Request $request)
-    {
+    public function getJadwal(Request $request){
         $wilayah = $request->wilayah;
         try {
             $jadwal = DB::select("SELECT a.* FROM " . $wilayah . ".jadwalbaca a ORDER BY tanggal");
@@ -69,30 +66,21 @@ class Controller extends BaseController
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
         }
     }
-    public function getBacaan(Request $request, $id = ";")
-    {
-        $bulan = date("m");
-        $tahun = date("Y");
-        $tanggal = date("Y-m-d");
-        $idpembacameter = $request->cookie('access_token');
-        
+    public function getBacaan(Request $request,$jalan= '',  $id = ";"){
         $ids = base64_decode($id);
         $ids = str_replace(['\\/'], ['/'], $ids);
-        //echo $ids;
-        //Ambil id jika membuka detail
-        if ($request->is('detail/*') || $request->is('api/detail/*')) {
-            $query = "AND p.nosambungan = '" . $ids . "'";
-            // return response()->json(['datas' => $ids], 200);
-        }
-        // echo $ids;
-        //Ambil data jika membuka detail
+        $bulan = date("m");
+        $tahun = date("Y");
+        $tanggal = '2024-10-15';
+        $token = $request->cookie('access_token') ?? $request->header('api-key');
+        // return response()->json(['datas' => $token], 200);
+        $payload = JWTAuth::setToken($token)->getPayload();
+        $idpembacameter = $payload['idpembacameter'];
+        // $bulan = 10;
+        // $tahun = 2024;
+        // $tanggal = date("Y-m-d");
+        // $idpembacameter = 10;
         try {
-            // $validated = $request->validate([
-            //     'bulan' => 'required|integer',
-            //     'tahun' => 'required|integer',
-            //     'tanggal' => 'required|date',
-            //     'idpembacameter' => 'required|integer'
-            // ]);
             $data = DB::select(
                 "SELECT 
                     p.nosambungan,
@@ -148,29 +136,33 @@ class Controller extends BaseController
                     AND s.stan = '-1'
                     AND p.urutbaca != 0
                     AND s.isaccepted = 0
+                    AND s.idjalan = ".$jalan."
                 ORDER BY p.nosambungan;"
             );
             //Jika membuka list pelanggan
-            if ($request->is('detail/*')) {
+            if ($request->is('bacaan/*/detail/*')) {
                 return view('/detail', ['data' => $data, 'nosambungan' => $ids]);
             }
-            if ($request->is('api/detail/*')) {
-                return response()->json(['data' => $data, 'nosambungan' => $ids], 200);
+            if ($request->is('api/bacaan/*/detail/*')) {
+                foreach ($data as $key) {
+                    if ($key->nosambungan == $ids) {
+                        $data = $key;
+                        break;
+                    }
+                }
+                return response()->json(['data' => $data], 200);
             }
-            if ($request->path() == 'bacaan') {
+            if ($request->is('bacaan/*')) {
                 return view('/pelanggan', ['pelanggan' => $data]);
             }
             if ($request->is('api/*')) {
                 return response()->json(['data' => $data], 200);
             }
-            //Jika membuka detail pelanggan
             return view('/pelanggan', ['pelanggan' => $data]);
         } catch (QueryException $th) {
-            echo $th;
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
-        } catch (ValidationException $th) {
-            return response()->json(['error' => 'Validation error', 'message' => $th->errors()], 422);
+        } catch (Throwable $th) {
+            return response()->json(['error' => 'Validation error', 'message' => $th], 422);
         }
     }
-    public function updateBacaan(Request $request, string $id) {}
 }

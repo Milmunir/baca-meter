@@ -32,6 +32,7 @@ class userController extends Controller
             }
             $payload = JWTAuth::factory()->customClaims([
                 'sub' => $result[0]->idpembacameter,  // User ID or some unique identifier
+                'idpembacameter' => $result[0]->idpembacameter,  // User ID or some unique identifier
                 'namauser' => $result[0]->namauser,
                 'iat' => now()->timestamp,  // Issued at time
                 'exp' => now()->addMinutes(60)->timestamp // Expiration time (e.g., 1 hour)
