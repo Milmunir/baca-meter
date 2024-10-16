@@ -1,15 +1,9 @@
-<head>
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-</head>
 
-<body>
+@extends('tamplate.head')
+@section('bodhi')  
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
-            <nav class="nav bg-primary text-white nav-fill">
+            <nav class="nav bg-primary text-white nav-fill py-2 mb-2">
                 <div class="container">
                     <div class="row my-2">
                         <div class="col-2 align-self-center text-start PrevP">
@@ -37,7 +31,8 @@
                         </div>
                     </div>
                 </div>
-            </nav>
+             </nav>
+
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <div class="row py-2">
                     <div class="row py-2">
@@ -62,18 +57,18 @@
                     </div>
                 </div>
             </div>
+
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <form action="" id="formBacaan">
                     @csrf
                     <div class="row py-2">
                         <div class="row py-2">
-                            <div class="row">
+                            <div class="row py-2 mx-auto" style="height: 256px; width: 256px;">
                                 <img id="blah" src="#" alt="your image" />
                             </div>
-                            <div class="row d-grid gap-2 col-6 mx-auto mt-2">
+                            <div class="row d-grid gap-2 col-6 mx-auto mt-">
                                 <label for="imgInp" class="btn btn-info" style="color: white;">Upload Foto</label>
-                                <input accept="image/*;capture=camera" type='file' id="imgInp"
-                                    style="display: none;" />
+                                <input accept="image/*;capture=camera" type='file' id="imgInp" style="display: none;" />
                             </div>
                         </div>
                         <div class="row py-2">
@@ -106,7 +101,7 @@
     @endforeach
 
     <p id="console"></p>
-    <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
+    <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
         <div class="row py-2">
             <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="button" class="btn btn-danger" onclick="location.href = 'main.html'">KEMBALIE</button>
@@ -152,4 +147,4 @@
             }
         }
     </script>
-</body>
+@endsection

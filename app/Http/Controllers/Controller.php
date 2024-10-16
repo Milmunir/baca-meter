@@ -74,7 +74,8 @@ class Controller extends BaseController
         $bulan = date("m");
         $tahun = date("Y");
         $tanggal = date("Y-m-d");
-        $idpembacameter = $request->cookie('access_token');
+        // $idpembacameter = $request->cookie('access_token');
+        $idpembacameter = '10';
         
         $ids = base64_decode($id);
         $ids = str_replace(['\\/'], ['/'], $ids);

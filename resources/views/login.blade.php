@@ -1,11 +1,11 @@
 <head>
     <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('css/style_new.css')}}">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 </head>
 
-<body class="container mt-5 login_container">
+<body class="container px-5 px-xl-2 mt-5 login_container">
     <div class="judul text-center">
         <div class="row rounded mx-auto d-block">
             <img src="../reeesource/Logo.jpg" alt="" style="width: 200px;">
