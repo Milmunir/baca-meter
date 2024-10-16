@@ -63,14 +63,19 @@
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <form action="" id="formBacaan">
                     @csrf
+                    <input type="number" name="bulan" value="{{$key->bulan}}" hidden>
+                    <input type="number" name="tahun" value="{{$key->tahun}}" hidden>
+                    <input type="text" name="nosambungan" value="{{$key->nosambungan}}" hidden>
+                    <input type="number" name="pakai" value="{{$key->pakai}}" hidden>
+                    <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden>
                     <div class="row py-2">
                         <div class="row py-2">
                             <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
                                 <img id="blah" src="#" alt="your image" />
                             </div>
                             <div class="row d-grid gap-2 col-12 mx-auto mt-">
-                                <label for="imgInp" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
-                                <input accept="image/*;capture=camera" type='file' id="imgInp" style="display: none;" />
+                                <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
+                                <input accept="image/*;capture=camera" type='file' name="foto" id="imgInp" style="display: none;" />
                             </div>
                         </div>
                         <div class="row py-2">
@@ -78,24 +83,24 @@
                             <p>{{ $key->stanlalu }}</p>
                         </div>
                         <div class="row py-2">
-                            <label for="Stan_Meter" class="form-label">Stan Meter</label>
-                            <input type="text" class="form-control" id="Stan_Meter">
+                            <label for="stan" class="form-label">Stan Meter</label>
+                            <input type="text" class="form-control" name="stan" id="stan">
                         </div>
                         <div class="row py-2">
                             <h5>Pakai</h5>
                             <p>{{ $key->pakai }}</p>
                         </div>
                         <div class="row py-2">
-                            <label for="Catatan" class="form-label">Catatan</label>
-                            <input type="text" class="form-control" id="Catatan">
+                            <label for="idcatatan" class="form-label">Catatan</label>
+                            <input type="text" class="form-control" name="idcatatan" id="idcatatan">
                         </div>
                         <div class="row py-2">
-                            <label for="latitude" class="form-label">Latitude:</label>
-                            <input type="text" class="form-control" id="latitude" name="latitude" readonly>
+                            <label for="lat" class="form-label">Latitude:</label>
+                            <input type="text" class="form-control" id="lat" name="lat" readonly>
                         </div>
                         <div class="row py-2">
-                            <label for="longitude" class="form-label">Longitude:</label>
-                            <input type="text" class="form-control" id="longitude" name="longitude" readonly>
+                            <label for="long" class="form-label">Longitude:</label>
+                            <input type="text" class="form-control" id="long" name="long" readonly>
                         </div>
                         <button type="button" class="btn btn-info py-2" style="color: white;" onclick="getLocation()"><h5>Get Location</h5></button>
                     </div>
