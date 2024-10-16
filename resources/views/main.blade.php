@@ -7,7 +7,6 @@
 @section('bodhi')
     <div class="container">
       <div class="row px-2">
-
         <div class="container d-none d-md-block pb-2 shadow my-2 rounded pt-md-2">
           <div class="row">
               <div class="col-1 px-md-auto my-md-auto Jadoel">
