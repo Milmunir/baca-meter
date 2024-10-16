@@ -1,63 +1,63 @@
-<head>
-    <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-</head>
+@extends('template.head')
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Delta Tirta</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Upload</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Download</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Hapus Semua Data</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="login.html">Logout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+@section('navi')
+  @include('template.navia')
+@endsection
 
+@section('bodhi')
     <div class="container">
-      <div class="row">
+      <div class="row px-2">
+        <div class="container d-none d-md-block pb-2 shadow my-2 rounded pt-md-2">
+          <div class="row">
+              <div class="col-1 px-md-auto my-md-auto Jadoel">
+                <p class="Sub_Perum">No</p>
+              </div>
+              <div class="col-1 align-self-center">
+                <p class="Sub_Perum">Icon</p>
+              </div>
+              <div class="col-8 align-self-center">
+                <div class="row">
+                  <div class="col-12 col-md-6 p-0">
+                    <p class="Sub_Perum">Nama Perum</p>
+                  </div>
+                  <div class="col-12 col-md-6 p-0">
+                    <p class="Sub_Perum">Kode Area</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-2 p-0">
+                <p class="Sub_Perum">Jumlah Meter</p>
+              </div>
+          </div>    
+        </div>
+
+        
         @foreach ($jalan as $key)
-        <div class="container shadow my-2 bg-white rounded col-lg-6" onclick="location.href = '/bacaan/{{$key->idjalan}}'" style="cursor: pointer;">
-            <div class="col">
+        <div class="container main_container pb-2 shadow my-2 rounded pt-md-2" onclick="location.href = 'List_pel.html'" style="cursor: pointer;">
+          <div class="row">
+              <div class="d-none d-md-block col-md-1 px-md-auto my-md-auto Jadoel">
+                <h4>{{ $loop->iteration }}</h4>
+              </div>
+              <div class="col-2 px-auto pt-3 pb-1 col-md-1 p-md-0 my-md-2 mx-md-auto PP_Max_Size">
+                <img src="../reeesource/TIS.jpg" class="ratio ratio-1x1 PP_Container roounder" alt="">
+              </div>
+              <div class="col-8 align-self-center">
                 <div class="row">
-                    <div class="col-10">
-                        <h1>{{$key->namajalan}}</h1>
-                    </div>
-                    <div class="col-2 align-self-center py-0 text-center">
-                      <h5>0/{{$key->jumlah}}</h5>
-                    </div>
+                  <div class="col-12 col-md-6 px-md-1">
+                    <p class="Nama_Perum">{{$key->namajalan}}</p>
+                  </div>
+                  <div class="col-12 col-md-6 px-md-1">
+                    <p class="Sub_Perum">{{$key->idcabang}}/{{$key->idwilayah}}/{{$key->idjalan}}</p>
+                  </div>
                 </div>
-                <div class="row">
-                    <div class="col-10">
-                        <h5>{{$key->idcabang}}/{{$key->idwilayah}}/{{$key->idjalan}}</h5>
-                    </div>
-                    <div class="col-2 align-self-center text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
+              </div>
+              <div class="col-2 d-flex my-auto mx-auto col-md-2 px-md-1">
+                <p class="Sub_Perum">0/{{$key->jumlah}}</p>
+              </div>
+          </div>    
         </div>
         @endforeach
 
       </div>
     </div>
-</body>
+@endsection

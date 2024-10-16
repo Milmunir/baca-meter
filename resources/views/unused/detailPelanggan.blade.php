@@ -1,11 +1,6 @@
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="../bs/css/bootstrap.min.css">
-        <script src="../bs/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-    
-    <body>
+
+@extends('tamplate.head')
+@section('bodhi')  
         <nav class="nav bg-primary text-white nav-fill py-2 mb-2">
             <div class="container">
                 <div class="row my-2">
@@ -110,5 +105,5 @@
                 }
             }
           </script> 
-    </body>
+@endsection
     
