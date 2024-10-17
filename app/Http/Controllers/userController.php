@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -51,9 +52,11 @@ class userController extends Controller
         }
     }
 
-    public function show($id)
+    public function logout(Request $request)
     {
-        //
+        $token = $request->cookie('access_token');
+        $cookie = Cookie::forget('access_token');
+        return redirect('login')->withCookie($cookie);
     }
 
     public function update(Request $request, $id)

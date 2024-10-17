@@ -18,15 +18,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/main', function () {
-    return view('/main');
-});
-Route::get('/bacaan/{jalan}/detail/{id?}', [Controller::class, 'getBacaan']);
-Route::get('/bacaan/{jalan}', [Controller::class, 'getBacaan']);
-Route::get('/jalan', [Controller::class, 'getJalan']);
-Route::get('/detail/{id}', [Controller::class, 'getBacaan']);
-Route::get('/login', [userController::class, 'login']);
 Route::post('/login', [userController::class, 'login']);
+Route::get('/login', [userController::class, 'login']);
+
+Route::middleware(['jwtAuth'])->group(function(){
+    Route::get('/bacaan/{jalan}/detail/{id?}', [Controller::class, 'getBacaan']);
+    Route::get('/bacaan/{jalan}', [Controller::class, 'getBacaan']);
+    Route::get('/jalan', [Controller::class, 'getJalan']);
+    Route::get('/detail/{id}', [Controller::class, 'getBacaan']);
+    Route::get('/logout', [userController::class, 'logout']);
+});
 
 
 
