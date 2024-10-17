@@ -1,6 +1,6 @@
 
 @extends('template.head')
-@section('bodhi')  
+@section('bodhi')
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
             <nav class="nav bg-primary text-white nav-fill py-2 mb-2">
@@ -33,6 +33,7 @@
                 </div>
              </nav>
 
+        <div class="container">
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <div class="row py-2">
                     <div class="row py-2">
@@ -61,14 +62,19 @@
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <form action="" id="formBacaan">
                     @csrf
+                    <input type="number" name="bulan" value="{{$key->bulan}}" hidden>
+                    <input type="number" name="tahun" value="{{$key->tahun}}" hidden>
+                    <input type="text" name="nosambungan" value="{{$key->nosambungan}}" hidden>
+                    <input type="number" name="pakai" value="{{$key->pakai}}" hidden>
+                    <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden>
                     <div class="row py-2">
                         <div class="row py-2">
-                            <div class="row py-2 mx-auto" style="height: 256px; width: 256px;">
+                            <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
                                 <img id="blah" src="#" alt="your image" />
                             </div>
-                            <div class="row d-grid gap-2 col-6 mx-auto mt-">
-                                <label for="imgInp" class="btn btn-info" style="color: white;">Upload Foto</label>
-                                <input accept="image/*;capture=camera" type='file' id="imgInp" style="display: none;" />
+                            <div class="row d-grid gap-2 col-12 mx-auto mt-">
+                                <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
+                                <input accept="image/*;capture=camera" type='file' name="foto" id="imgInp" style="display: none;" />
                             </div>
                         </div>
                         <div class="row py-2">
@@ -76,41 +82,44 @@
                             <p>{{ $key->stanlalu }}</p>
                         </div>
                         <div class="row py-2">
-                            <label for="Stan_Meter" class="form-label">Stan Meter</label>
-                            <input type="text" class="form-control" id="Stan_Meter">
+                            <label for="stan" class="form-label">Stan Meter</label>
+                            <input type="text" class="form-control" name="stan" id="stan">
                         </div>
                         <div class="row py-2">
                             <h5>Pakai</h5>
                             <p>{{ $key->pakai }}</p>
                         </div>
                         <div class="row py-2">
-                            <label for="Catatan" class="form-label">Catatan</label>
-                            <input type="text" class="form-control" id="Catatan">
+                            <label for="idcatatan" class="form-label">Catatan</label>
+                            <input type="text" class="form-control" name="idcatatan" id="idcatatan">
                         </div>
-                        <label for="latitude">Latitude:</label>
-                        <input type="text" id="latitude" name="latitude" readonly>
-                        <br>
-                        <label for="longitude">Longitude:</label>
-                        <input type="text" id="longitude" name="longitude" readonly>
-                        <br>
-                        <button type="button" onclick="getLocation()">Get Location</button>
+                        <div class="row py-2">
+                            <label for="lat" class="form-label">Latitude:</label>
+                            <input type="text" class="form-control" id="lat" name="lat" readonly>
+                        </div>
+                        <div class="row py-2">
+                            <label for="long" class="form-label">Longitude:</label>
+                            <input type="text" class="form-control" id="long" name="long" readonly>
+                        </div>
+                        <button type="button" class="btn btn-info py-2" style="color: white;" onclick="getLocation()"><h5>Get Location</h5></button>
                     </div>
                 </form>
             </div>
         @endif
     @endforeach
 
-    <p id="console"></p>
-    <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
-        <div class="row py-2">
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-danger" onclick="location.href = 'main.html'">KEMBALIE</button>
-            </div>
-            <div class="d-grid gap-2 col-6 mx-auto">
-                <button type="button" class="btn btn-success" onclick="location.href = 'main.html'">SIEMPAN</button>
+            <p id="console"></p>
+            <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
+                <div class="row py-2">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'"><h5>KEMBALIE</h5></button>
+                    </div>
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
     <script>
         imgInp.onchange = evt => {
