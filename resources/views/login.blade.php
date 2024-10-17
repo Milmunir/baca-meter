@@ -30,7 +30,7 @@
         <div class="row justify-content-center">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
+                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
             </div>
         </div>
         {{-- @error($e)
@@ -41,12 +41,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block logbtn">Masuk</button>
             </div>
         </div>
-    </form> 
-    <div class="container">
-        <div class="row mx-3">
-            <a href="#">Reset data user ?</a>
-        </div>
-    </div>
+    </form>
     
     <script>
         
