@@ -63,11 +63,11 @@
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <form action="" id="formBacaan">
                     @csrf
-                    <input type="number" name="bulan" value="{{$key->bulan}}" hidden>
+                    {{-- <input type="number" name="bulan" value="{{$key->bulan}}" hidden>
                     <input type="number" name="tahun" value="{{$key->tahun}}" hidden>
                     <input type="text" name="nosambungan" value="{{$key->nosambungan}}" hidden>
                     <input type="number" name="pakai" value="{{$key->pakai}}" hidden>
-                    <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden>
+                    <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
                     <div class="row py-2">
                         <div class="row py-2">
                             <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="row d-grid gap-2 col-12 mx-auto mt-">
                                 <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
-                                <input accept="image/*;capture=camera" type='file' name="foto" id="imgInp" style="display: none;" />
+                                <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
                             </div>
                         </div>
                         <div class="row py-2">
@@ -123,8 +123,8 @@
         </div>
 
     <script>
-        imgInp.onchange = evt => {
-            const [file] = imgInp.files
+        foto.onchange = evt => {
+            const [file] = foto.files
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
