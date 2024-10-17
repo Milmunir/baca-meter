@@ -1,5 +1,5 @@
 
-@extends('tamplate.head')
+@extends('template.head')
 @section('bodhi')  
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
