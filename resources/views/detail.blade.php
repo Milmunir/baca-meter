@@ -1,7 +1,6 @@
 
 @extends('template.head')
 @section('bodhi')
-
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
             <nav class="nav bg-primary text-white nav-fill py-2 mb-2">
