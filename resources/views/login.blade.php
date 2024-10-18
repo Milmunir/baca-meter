@@ -6,9 +6,11 @@
 </head>
 
 <body class="container px-5 px-xl-2 mt-5 login_container">
+    {{-- Bagian atas (logo dan nama aplikasi) --}}
     <div class="judul text-center">
         <div class="row rounded mx-auto d-block">
-            <img src="../reeesource/Logo.jpg" alt="" style="width: 200px;">
+            {{-- url mengarah ke bagian public/image/(gambar.png/jpg/dll) --}}
+            <img src="{{URL::asset('/image/Logo.jpg')}}" alt="" style="width: 200px;">
         </div>
         <div class="row mt-3">
             <h1>APK CAMAT</h1>
@@ -18,6 +20,12 @@
         </div>
     </div>
     
+
+    {{-- Bagian form username, password, dan tombol login
+    setelah tombol login ditekan  data di oper (method = POST) ke bagian user controller function login untuk dicek -
+    - apakah username dan password sesuai dengan yang ada di database jika tidak maka return 401 (Unauthorized),
+    jika ada maka generate token, cookie, dsb (waktu expired login) --}}
+
     <form class="container mt-4" action="login" method="POST">
         @csrf
         <div class="row justify-content-center">
@@ -42,6 +50,8 @@
             </div>
         </div>
     </form> 
+
+    {{-- reset data user (belum di link kemanapun) --}}
     <div class="container">
         <div class="row mx-3">
             <a href="#">Reset data user ?</a>

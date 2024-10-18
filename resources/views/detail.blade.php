@@ -1,6 +1,9 @@
-
+{{-- bagian main mengikuti templating yang ada di (views/template/head.blade.php) --}}
 @extends('template.head')
 @section('bodhi')
+
+{{-- bagian navbar tidak dipisah karena ada fungsi looping yang mencakup bagian navbar
+dan container atas --}}
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
             <nav class="nav bg-primary text-white nav-fill py-2 mb-2">
@@ -73,6 +76,9 @@
                                 <img id="blah" src="#" alt="your image" />
                             </div>
                             <div class="row d-grid gap-2 col-12 mx-auto mt-">
+
+                                {{-- bagian upload dan preview foto terhubung dengan javascript yang ada dibawah foto.onchange tiap tombol
+                                ditekan fungsi akan langsung dijalankan --}}
                                 <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
                                 <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
                             </div>
@@ -111,9 +117,11 @@
             <p id="console"></p>
             <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <div class="row py-2">
+                    {{-- tombol untuk kembali ke list pelanggan --}}
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'"><h5>KEMBALIE</h5></button>
                     </div>
+                    {{-- tombol untuk menyimpan perubahan --}}
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
                     </div>
@@ -129,13 +137,14 @@
             }
         }
 
+        // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
                     const latitude = position.coords.latitude;
                     const longitude = position.coords.longitude;
 
-                    // Update the form fields
+                    // Update form longitude dan latitude
                     document.getElementById('latitude').value = latitude;
                     document.getElementById('longitude').value = longitude;
                     
