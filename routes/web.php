@@ -27,6 +27,7 @@ Route::middleware(['jwtAuth'])->group(function(){
     Route::get('/jalan', [Controller::class, 'getJalan']);
     Route::get('/detail/{id}', [Controller::class, 'getBacaan']);
     Route::get('/logout', [userController::class, 'logout']);
+    Route::post('/upstan', [Controller::class, 'uploadStanMeter']);
 });
 
 

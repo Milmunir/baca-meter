@@ -33,20 +33,24 @@ class Controller extends BaseController
         $path = env('FILE_IMAGE_PATH');
         try {
             $validated = $request->validate([
-                'bulan' => 'required|integer',
-                'tahun' => 'required|integer',
+                // 'bulan' => 'required|integer',
+                // 'tahun' => 'required|integer',
                 'nosambungan' => 'required|string',
                 'stan' => 'required|integer', //adanya kolom stan di tabel stanmeter
                 'pakai' => 'required|integer',
-                'pakairata' => 'required|integer',
+                // 'pakairata' => 'required|integer',
                 'idcatatan' => 'required|integer',
                 'lat' => 'required|string',
                 'long' => 'required|string',
-                'tglbaca' => 'required|date',
+                // 'tglbaca' => 'required|date',
                 'iduser' => 'required|string',
                 'foto' => 'required|file|image'
             ]);
-            // $validated['foto'] = $request->file('foto')->store($path);
+            $validated['bulan'] = date("m");
+            $validated['tahun'] = date("Y");
+            $validated['pakairata'] = 6000;
+            $validated['tglbaca'] = date("Y-m-d");
+            $validated['foto'] = $request->file('foto')->store($path);
             $result = DB::update("UPDATE stanmeter SET tglbaca = '" . $validated['tglbaca'] . "', stan =  " . $validated['stan'] . ",pakai = " . $validated['pakai'] . ", pakairata = " . $validated['pakairata'] . ", idcatatan = " . $validated['idcatatan'] . ", iduser = " . $validated['iduser'] . ", lat = '" . $validated['lat'] . "', lon = '" . $validated['long'] . "', foto = '" . $validated['foto'] . "', path_foto = '" . $path . "' WHERE tahun = " . $validated['tahun'] . " AND bulan = " . $validated['bulan'] . " AND nosambungan = '" . $validated['nosambungan'] . "'");
             return response()->json(['message' => $validated], 200);
         } catch (ValidationException $th) {
@@ -71,14 +75,14 @@ class Controller extends BaseController
         $ids = str_replace(['\\/'], ['/'], $ids);
         $bulan = date("m");
         $tahun = date("Y");
-        $tanggal = '2024-10-15';
+        // $tanggal = date("Y-m-d"); 
         $token = $request->cookie('access_token') ?? $request->header('api-key');
         // return response()->json(['datas' => $token], 200);
         $payload = JWTAuth::setToken($token)->getPayload();
         $idpembacameter = $payload['idpembacameter'];
         // $bulan = 10;
         // $tahun = 2024;
-        // $tanggal = date("Y-m-d");
+        $tanggal = '2024-10-15'; // ojo lali diganti
         // $idpembacameter = 10;
         try {
             $data = DB::select(
