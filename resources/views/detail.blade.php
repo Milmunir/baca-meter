@@ -64,12 +64,13 @@
                         {{-- <input type="number" name="tahun" value="{{$key->tahun}}" hidden> --}}
                         <input type="text" name="nosambungan" value="{{ $key->nosambungan }}" hidden>
                         <input type="number" name="pakai" value="{{ $key->pakai }}" hidden>
+                        <input type="number" name="idjalan" value="{{ $key->idjalan }}" hidden>
                         {{-- <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
                         <input type="text" name="iduser" value="{{ $key->iduser }}" hidden>
                         <div class="row py-2">
                             <div class="row py-2">
-                                <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
-                                    <img id="blah" src="#" alt="your image" />
+                                <div class="row py-2 col-12 mx-auto" style="height: 20rem">
+                                    <img id="blah" src="#" class="mh-100" style="object-fit: contain" alt="your image" />
                                 </div>
                                 <div class="row d-grid gap-2 col-12 mx-auto mt-">
                                     <label for="foto" class="btn btn-info py-2" style="color: white;">
@@ -116,7 +117,7 @@
 <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
     <div class="row py-2">
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'">
+            <button type="button" class="btn btn-danger py-2" onclick="location.href = '{{ Str::before(Request::url(), '/detail')}}'">
                 <h5>KEMBALIE</h5>
             </button>
         </div>

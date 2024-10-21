@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Str;
 
 class Controller extends BaseController
 {
@@ -22,7 +23,7 @@ class Controller extends BaseController
         try {
             $jalan = DB::select("SELECT a.* FROM rekening.jalan a ORDER BY idcabang,idwilayah,idjalan");
             if ($url == 'jalan') {
-                return view('/main', ['jalan' => $jalan]);
+                return view('/main', ['jalan' => $jalan, 'title' => 'Jalan']);
             }
             return response()->json(['jalan' => $jalan], 200);
         } catch (QueryException $th) {
@@ -52,6 +53,9 @@ class Controller extends BaseController
             $validated['tglbaca'] = date("Y-m-d");
             $validated['foto'] = $request->file('foto')->store($path);
             $result = DB::update("UPDATE stanmeter SET tglbaca = '" . $validated['tglbaca'] . "', stan =  " . $validated['stan'] . ",pakai = " . $validated['pakai'] . ", pakairata = " . $validated['pakairata'] . ", idcatatan = " . $validated['idcatatan'] . ", iduser = " . $validated['iduser'] . ", lat = '" . $validated['lat'] . "', lon = '" . $validated['long'] . "', foto = '" . $validated['foto'] . "', path_foto = '" . $path . "' WHERE tahun = " . $validated['tahun'] . " AND bulan = " . $validated['bulan'] . " AND nosambungan = '" . $validated['nosambungan'] . "'");
+            if (!$request->is('api/')) {
+                return redirect('/bacaan/'.$request->idjalan);
+            }
             return response()->json(['message' => $validated], 200);
         } catch (ValidationException $th) {
             return response()->json(['error' => 'validation error', 'messages' => $th->errors()], 422);
@@ -145,7 +149,7 @@ class Controller extends BaseController
             );
             //Jika membuka list pelanggan
             if ($request->is('bacaan/*/detail/*')) {
-                return view('/detail', ['data' => $data, 'nosambungan' => $ids]);
+                return view('/detail', ['data' => $data, 'nosambungan' => $ids, 'title' => 'Detail Pelanggan']);
             }
             if ($request->is('api/bacaan/*/detail/*')) {
                 foreach ($data as $key) {
@@ -157,12 +161,12 @@ class Controller extends BaseController
                 return response()->json(['data' => $data], 200);
             }
             if ($request->is('bacaan/*')) {
-                return view('/pelanggan', ['pelanggan' => $data]);
+                return view('/pelanggan', ['pelanggan' => $data, 'title' => 'Daftar Pelanggan']);
             }
             if ($request->is('api/*')) {
                 return response()->json(['data' => $data], 200);
             }
-            return view('/pelanggan', ['pelanggan' => $data]);
+            return view('/pelanggan', ['pelanggan' => $data, 'title' => 'Daftar Pelaggan']);
         } catch (QueryException $th) {
             return response()->json(['error' => 'Database error', 'message' => $th], 500);
         } catch (Throwable $th) {
