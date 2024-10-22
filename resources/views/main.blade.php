@@ -46,9 +46,7 @@ mengarah ke column (namajalan,idjalan,idcabang) di database rekening table table
         <div class="container main_container pb-2 shadow my-2 rounded pt-md-2" onclick="location.href = '/bacaan/{{$key->idjalan}}'" style="cursor: pointer;">
           <div class="row">
               <div class="d-none d-md-block col-md-1 px-md-auto my-md-auto Jadoel">
-
-{{-- numbering berdasarkan berapa kali loop berjalan (iterasi) dimulai dari 1 --}}
-                <h4>{{ $loop->iteration }}</h4>
+                <h4>{{ $loop->iteration }}</h4> {{-- numbering berdasarkan berapa kali loop berjalan (iterasi) dimulai dari 1 --}}
               </div>
               <div class="col-2 px-auto pt-3 pb-1 col-md-1 p-md-0 my-md-2 mx-md-auto p-sm-auto PP_Max_Size">
                 <img src="{{URL::asset('/image/TIS.jpg')}}" class="PP_Container roounder" alt="">

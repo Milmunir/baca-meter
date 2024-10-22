@@ -50,8 +50,7 @@ siapa yang login di awal tadi) --}}
                 onclick="location.href = '{{Request::url().'/detail/'.base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
                     <div class="row">
                         <div class="d-none d-lg-block col-lg-1 px-md-auto my-md-auto Jadoel">
-                            {{-- numbering berdasarkan berapa kali loop berjalan (iterasi) dimulai dari 1 --}}
-                            <h4 class="px-lg-2">{{ $loop->iteration }}</h4>
+                            <h4 class="px-lg-2">{{ $loop->iteration }}</h4> {{-- numbering berdasarkan berapa kali loop berjalan (iterasi) dimulai dari 1 --}}
                         </div>
                         <div class="col-2 p-0 col-lg-1 p-sm-auto m-my-auto PP_Max_Size_pel">
                             <img src="{{URL::asset('/image/PP.jpg')}}" class="PP_Container roounder_pel" alt="">

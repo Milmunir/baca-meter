@@ -38,7 +38,7 @@
         <div class="row justify-content-center">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="text" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
+                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
             </div>
         </div>
         {{-- @error($e)
@@ -49,6 +49,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block logbtn">Masuk</button>
             </div>
         </div>
+<<<<<<< HEAD
     </form> 
 
     {{-- reset data user (belum di link kemanapun) --}}
@@ -57,6 +58,9 @@
             <a href="#">Reset data user ?</a>
         </div>
     </div>
+=======
+    </form>
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
     
     <script>
         

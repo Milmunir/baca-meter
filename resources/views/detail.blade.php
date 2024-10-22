@@ -1,3 +1,4 @@
+
 {{-- bagian main mengikuti templating yang ada di (views/template/head.blade.php) --}}
 @extends('template.head')
 @section('bodhi')
@@ -11,9 +12,8 @@ dan container atas --}}
                     <div class="row my-2">
                         <div class="col-2 align-self-center text-start PrevP">
                             @if (!$loop->first)
-                                <i class="bi bi-caret-left-fill fs-1 px-0 py-0"
-                                    style="font-weight: bolder; cursor: pointer;"
-                                    onclick="location.href = '/detail/{{ base64_encode($data[$loop->index - 1]->nosambungan) }}'"></i>
+                                <i class="bi bi-caret-left-fill fs-1 px-0 py-0" style="font-weight: bolder; cursor: pointer;"
+                                    onclick="location.href = '{{ base64_encode($data[$loop->index - 1]->nosambungan) }}'"></i>
                             @endif
                         </div>
                         <div class="col-2 align-self-center text-start">
@@ -29,39 +29,40 @@ dan container atas --}}
                             @if (!$loop->last)
                                 <i class="bi bi-caret-right-fill fs-1 px-0 py-0"
                                     style="font-weight: bolder; cursor: pointer;"
-                                    onclick="location.href = '/detail/{{ base64_encode($data[$loop->index + 1]->nosambungan) }}'"></i>
+                                    onclick="location.href = '{{ base64_encode($data[$loop->index + 1]->nosambungan) }}'"></i>
                             @endif
                         </div>
                     </div>
                 </div>
-             </nav>
+            </nav>
 
-        <div class="container">
-            <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
-                <div class="row py-2">
+            <div class="container">
+                <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                     <div class="row py-2">
-                        <h5>No Sambung</h5>
-                        <p>{{ $key->nosambungan }}</p>
-                    </div>
-                    <div class="row py-2">
-                        <h5>Nama Pelanggan</h5>
-                        <p>{{ $key->nama }}</p>
-                    </div>
-                    <div class="row py-2">
-                        <h5>Alamat</h5>
-                        <p>{{ $key->alamat }}</p>
-                    </div>
-                    <div class="row py-2">
-                        <h5>Tarif</h5>
-                        <p>{{ $key->idtarif }}</p>
-                    </div>
-                    <div class="row py-2">
-                        <h5>Wilayah</h5>
-                        <p>{{ $key->idwilayah }}</p>
+                        <div class="row py-2">
+                            <h5>No Sambung</h5>
+                            <p>{{ $key->nosambungan }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <h5>Nama Pelanggan</h5>
+                            <p>{{ $key->nama }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <h5>Alamat</h5>
+                            <p>{{ $key->alamat }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <h5>Tarif</h5>
+                            <p>{{ $key->idtarif }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <h5>Wilayah</h5>
+                            <p>{{ $key->idwilayah }}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+<<<<<<< HEAD
             <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                 <form action="" id="formBacaan">
                     @csrf
@@ -71,18 +72,67 @@ dan container atas --}}
                     <input type="number" name="pakai" value="{{$key->pakai}}" hidden>
                     <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
                     <div class="row py-2">
+=======
+                <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
+                    <form action="/upstan" id="formBacaan" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        {{-- <input type="number" name="bulan" value="{{$key->bulan}}" hidden> --}}
+                        {{-- <input type="number" name="tahun" value="{{$key->tahun}}" hidden> --}}
+                        <input type="text" name="nosambungan" value="{{ $key->nosambungan }}" hidden>
+                        <input type="number" name="pakai" value="{{ $key->pakai }}" hidden>
+                        {{-- <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
+                        <input type="text" name="iduser" value="{{ $key->iduser }}" hidden>
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                         <div class="row py-2">
-                            <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
-                                <img id="blah" src="#" alt="your image" />
+                            <div class="row py-2">
+                                <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
+                                    <img id="blah" src="#" alt="your image" />
+                                </div>
+                                <div class="row d-grid gap-2 col-12 mx-auto mt-">
+                                    <label for="foto" class="btn btn-info py-2" style="color: white;">
+                                        <h5>Upload Foto</h5>
+                                    </label>
+                                    <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
+                                </div>
                             </div>
+<<<<<<< HEAD
                             <div class="row d-grid gap-2 col-12 mx-auto mt-">
 
                                 {{-- bagian upload dan preview foto terhubung dengan javascript yang ada dibawah foto.onchange tiap tombol
                                 ditekan fungsi akan langsung dijalankan --}}
                                 <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
                                 <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
+=======
+                            <div class="row py-2">
+                                <h5>Stan Lalu</h5>
+                                <p>{{ $key->stanlalu }}</p>
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                             </div>
+                            <div class="row py-2">
+                                <label for="stan" class="form-label">Stan Meter</label>
+                                <input type="text" class="form-control" name="stan" id="stan">
+                            </div>
+                            <div class="row py-2">
+                                <h5>Pakai</h5>
+                                <p>{{ $key->pakai }}</p>
+                            </div>
+                            <div class="row py-2">
+                                <label for="idcatatan" class="form-label">Catatan</label>
+                                <input type="text" class="form-control" name="idcatatan" id="idcatatan">
+                            </div>
+                            <div class="row py-2">
+                                <label for="lat" class="form-label">Latitude:</label>
+                                <input type="text" class="form-control" id="lat" name="lat" readonly>
+                            </div>
+                            <div class="row py-2">
+                                <label for="long" class="form-label">Longitude:</label>
+                                <input type="text" class="form-control" id="long" name="long" readonly>
+                            </div>
+                            <button type="button" class="btn btn-info py-2" style="color: white;" onclick="getLocation()">
+                                <h5>Get Location</h5>
+                            </button>
                         </div>
+<<<<<<< HEAD
                         <div class="row py-2">
                             <h5>Stan Lalu</h5>
                             <p>{{ $key->stanlalu }}</p>
@@ -125,18 +175,49 @@ dan container atas --}}
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
                     </div>
+=======
+                    </form>
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                 </div>
-            </div>
-        </div>
+            @break
+    @endif
+@endforeach
 
+<p id="console"></p>
+<div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
+    <div class="row py-2">
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'">
+                <h5>KEMBALIE</h5>
+            </button>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-success py-2" form="formBacaan">
+                <h5>SIEMPAN</h5>
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+
+<<<<<<< HEAD
     <script>
         foto.onchange = evt => {
             const [file] = foto.files
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
+=======
+<script>
+    foto.onchange = evt => {
+        const [file] = foto.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
         }
+    }
 
+<<<<<<< HEAD
         // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
         function getLocation() {
             if (navigator.geolocation) {
@@ -163,6 +244,33 @@ dan container atas --}}
             } else {
                 document.getElementById('console').value = "Geolocation is not supported by this browser.";
             }
+=======
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                // Update the form fields
+                document.getElementById('lat').value = latitude;
+                document.getElementById('long').value = longitude;
+
+                // Optionally, send the coordinates to your Laravel backend
+                // fetch('/your-laravel-route', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                //     },
+                //     body: JSON.stringify({ latitude, longitude })
+                // });
+            }, function(error) {
+                document.getElementById('console').value = error;
+            });
+        } else {
+            document.getElementById('console').value = "Geolocation is not supported by this browser.";
+>>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
         }
-    </script>
+    }
+</script>
 @endsection
