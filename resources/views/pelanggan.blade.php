@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="col-2 col-md-1 p-md-0 my-auto">
-                        <p class="Sub_Perum">Meter ?</p>
+                        <p class="Sub_Perum">No Urut</p>
                     </div>
                 </div>
             </div>

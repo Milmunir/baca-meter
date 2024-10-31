@@ -13,10 +13,10 @@
             <img src="{{URL::asset('/image/Logo.jpg')}}" alt="" style="width: 200px;">
         </div>
         <div class="row mt-3">
-            <h1>APK CAMAT</h1>
+            <h1>Delta Tirta Sidoarjo</h1>
         </div>
         <div class="row mb-4">
-            <h5>APlikasi baCA MeterAnT</h5>
+            <h5>Aplikasi Baca Meter</h5>
         </div>
     </div>
     
@@ -38,7 +38,7 @@
         <div class="row justify-content-center">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
+                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Password">
             </div>
         </div>
         {{-- @error($e)
@@ -49,18 +49,7 @@
                 <button type="submit" class="btn btn-primary btn-lg btn-block logbtn">Masuk</button>
             </div>
         </div>
-<<<<<<< HEAD
-    </form> 
-
-    {{-- reset data user (belum di link kemanapun) --}}
-    <div class="container">
-        <div class="row mx-3">
-            <a href="#">Reset data user ?</a>
-        </div>
-    </div>
-=======
     </form>
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
     
     <script>
         
