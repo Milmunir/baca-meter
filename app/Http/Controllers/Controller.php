@@ -49,7 +49,7 @@ class Controller extends BaseController
             ]);
             $validated['bulan'] = date("m");
             $validated['tahun'] = date("Y");
-            $validated['pakairata'] = 6000;
+            $validated['pakairata'] = 6000; //placeholder
             $validated['tglbaca'] = date("Y-m-d");
             $validated['foto'] = $request->file('foto')->store($path);
             $result = DB::update("UPDATE stanmeter SET tglbaca = '" . $validated['tglbaca'] . "', stan =  " . $validated['stan'] . ",pakai = " . $validated['pakai'] . ", pakairata = " . $validated['pakairata'] . ", idcatatan = " . $validated['idcatatan'] . ", iduser = " . $validated['iduser'] . ", lat = '" . $validated['lat'] . "', lon = '" . $validated['long'] . "', foto = '" . $validated['foto'] . "', path_foto = '" . $path . "' WHERE tahun = " . $validated['tahun'] . " AND bulan = " . $validated['bulan'] . " AND nosambungan = '" . $validated['nosambungan'] . "'");

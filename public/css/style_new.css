@@ -82,7 +82,22 @@ p,h2{
         -2px -2px 20px rgb(116, 255, 116);
       padding: 1em;
     }
-  }
+}
+
+@media (min-width: 992px){
+    .roounder_pel{
+        border-radius: 50%;
+    }
+    .PP_Max_Size_pel{
+        max-height: 50px; 
+        max-width: auto;
+    }
+
+    .Nama_pelanggan{
+        font-size: medium;
+        font-weight: normal;
+    }
+}
 
 @media (min-width: 768px) {
     .roounder{
@@ -96,11 +111,6 @@ p,h2{
     .PP_Max_Size{
         max-height: 50px; 
         max-width: auto;
-    }
-
-    .Nama_pelanggan{
-        font-size: medium;
-        font-weight: normal;
     }
 
     .Nama_Perum{
