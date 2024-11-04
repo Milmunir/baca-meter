@@ -147,9 +147,10 @@ class Controller extends BaseController
                     AND s.idjalan = ".$jalan."
                 ORDER BY p.nosambungan;"
             );
+            $catatan = DB::select("SELECT a.* FROM rekening.catatanmeter a");
             //Jika membuka list pelanggan
             if ($request->is('bacaan/*/detail/*')) {
-                return view('/detail', ['data' => $data, 'nosambungan' => $ids, 'title' => 'Detail Pelanggan']);
+                return view('/detail', ['data' => $data, 'nosambungan' => $ids, 'title' => 'Detail Pelanggan', 'catatan' => $catatan]);
             }
             if ($request->is('api/bacaan/*/detail/*')) {
                 foreach ($data as $key) {

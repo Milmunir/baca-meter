@@ -99,7 +99,12 @@ dan container atas --}}
                             </div>
                             <div class="row py-2">
                                 <label for="idcatatan" class="form-label">Catatan</label>
-                                <input type="text" class="form-control" name="idcatatan" id="idcatatan">
+                                {{-- <input type="text" class="form-control" name="idcatatan" id="idcatatan"> --}}
+                                <select name="idcatatan" id="idcatatan" class="form-control">
+                                    @foreach ($catatan as $key)
+                                        <option value="{{$key->idcatatan}}">{{$key->keterangan}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="row py-2">
                                 <label for="lat" class="form-label">Latitude:</label>
@@ -125,7 +130,7 @@ dan container atas --}}
         {{-- tombol untuk kembali ke list pelanggan --}}
         <div class="d-grid gap-2 col-6 mx-auto">
             <button type="button" class="btn btn-danger py-2" onclick="location.href = '{{ Str::before(Request::url(), '/detail')}}'">
-                <h5>KEMBALIE</h5>
+                <h5>KEMBALI</h5>
             </button>
         </div>
         {{-- tombol untuk menyimpan perubahan --}}
