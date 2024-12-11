@@ -75,7 +75,8 @@ class Controller extends BaseController
         $token = $request->cookie('access_token') ?? $request->header('api-key');
         $payload = JWTAuth::setToken($token)->getPayload();
         $idpembacameter = $payload['idpembacameter'];
-        $tanggal = '2024-10-15'; // ojo lali diganti
+        // $tanggal = "2024-12-11"; // ojo lali diganti
+        $tanggal = date("Y-m-d"); // ojo lali diganti
         try {
             $data = DB::select(
                 "SELECT 
