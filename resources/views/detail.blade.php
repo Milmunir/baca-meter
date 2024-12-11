@@ -1,8 +1,7 @@
 {{-- bagian main mengikuti templating yang ada di (views/template/head.blade.php) --}}
 @extends('template.head')
 @section('bodhi')
-
-{{-- bagian navbar tidak dipisah karena ada fungsi looping yang mencakup bagian navbar
+    {{-- bagian navbar tidak dipisah karena ada fungsi looping yang mencakup bagian navbar
 dan container atas --}}
     @foreach ($data as $key)
         @if ($key->nosambungan == $nosambungan)
@@ -75,7 +74,8 @@ dan container atas --}}
                         <div class="row py-2">
                             <div class="row py-2">
                                 <div class="row py-2 col-12 mx-auto" style="height: 20rem">
-                                    <img id="blah" src="#" class="mh-100" style="object-fit: contain" alt="your image" />
+                                    <img id="blah" src="#" class="mh-100" style="object-fit: contain"
+                                        alt="your image" />
                                 </div>
                                 <div class="row d-grid gap-2 col-12 mx-auto mt-">
                                     {{-- bagian upload dan preview foto terhubung dengan javascript yang ada dibawah foto.onchange tiap tombol
@@ -83,7 +83,8 @@ dan container atas --}}
                                     <label for="foto" class="btn btn-info py-2" style="color: white;">
                                         <h5>Upload Foto</h5>
                                     </label>
-                                    <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
+                                    <input accept="image/*;capture=camera" type='file' name="foto" id="foto"
+                                        style="display: none;" />
                                 </div>
                             </div>
 
@@ -104,7 +105,7 @@ dan container atas --}}
                                 {{-- <input type="text" class="form-control" name="idcatatan" id="idcatatan"> --}}
                                 <select name="idcatatan" id="idcatatan" class="form-control">
                                     @foreach ($catatan as $key)
-                                        <option value="{{$key->idcatatan}}">{{$key->keterangan}}</option>
+                                        <option value="{{ $key->idcatatan }}">{{ $key->keterangan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -120,51 +121,7 @@ dan container atas --}}
                                 <h5>Get Location</h5>
                             </button>
                         </div>
-                        <div class="row py-2">
-                            <h5>Stan Lalu</h5>
-                            <p>{{ $key->stanlalu }}</p>
-                        </div>
-                        <div class="row py-2">
-                            <label for="stan" class="form-label">Stan Meter</label>
-                            <input type="text" class="form-control" name="stan" id="stan">
-                        </div>
-                        <div class="row py-2">
-                            <h5>Pakai</h5>
-                            <p>{{ $key->pakai }}</p>
-                        </div>
-                        <div class="row py-2">
-                            <label for="idcatatan" class="form-label">Catatan</label>
-                            <input type="text" class="form-control" name="idcatatan" id="idcatatan">
-                        </div>
-                        <div class="row py-2">
-                            <label for="lat" class="form-label">Latitude:</label>
-                            <input type="text" class="form-control" id="lat" name="lat" readonly>
-                        </div>
-                        <div class="row py-2">
-                            <label for="long" class="form-label">Longitude:</label>
-                            <input type="text" class="form-control" id="long" name="long" readonly>
-                        </div>
-                        <button type="button" class="btn btn-info py-2" style="color: white;" onclick="getLocation()"><h5>Get Location</h5></button>
-                    </div>
-                </form>
-            </div>
-        @endif
-    @endforeach
-
-            <p id="console"></p>
-            <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
-                <div class="row py-2">
-                    {{-- tombol untuk kembali ke list pelanggan --}}
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'"><h5>KEMBALIE</h5></button>
-                    </div>
-                    {{-- tombol untuk menyimpan perubahan --}}
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
-                    </div>
-                    </form>
-                </div>
-            @break
+                    @break
     @endif
 @endforeach
 
@@ -173,7 +130,8 @@ dan container atas --}}
     <div class="row py-2">
         {{-- tombol untuk kembali ke list pelanggan --}}
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" class="btn btn-danger py-2" onclick="location.href = '{{ Str::before(Request::url(), '/detail')}}'">
+            <button type="button" class="btn btn-danger py-2"
+                onclick="location.href = '{{ Str::before(Request::url(), '/detail') }}'">
                 <h5>KEMBALI</h5>
             </button>
         </div>
@@ -194,33 +152,33 @@ dan container atas --}}
             blah.src = URL.createObjectURL(file)
         }
     }
-        // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+    // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
 
-                    // Update form longitude dan latitude
-                    document.getElementById('latitude').value = latitude;
-                    document.getElementById('longitude').value = longitude;
-                    
-                    // Optionally, send the coordinates to your Laravel backend
-                    // fetch('/your-laravel-route', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    //     },
-                    //     body: JSON.stringify({ latitude, longitude })
-                    // });
-                }, function(error) {
-                    document.getElementById('console').value = error;
-                });
-            } else {
-                document.getElementById('console').value = "Geolocation is not supported by this browser.";
-            }
+                // Update form longitude dan latitude
+                document.getElementById('latitude').value = latitude;
+                document.getElementById('longitude').value = longitude;
+
+                // Optionally, send the coordinates to your Laravel backend
+                // fetch('/your-laravel-route', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                //     },
+                //     body: JSON.stringify({ latitude, longitude })
+                // });
+            }, function(error) {
+                document.getElementById('console').value = error;
+            });
+        } else {
+            document.getElementById('console').value = "Geolocation is not supported by this browser.";
         }
+    }
     }
 </script>
 @endsection
