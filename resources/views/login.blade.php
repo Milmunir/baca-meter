@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{asset('css/style_new.css')}}">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="container px-5 px-xl-2 mt-5 login_container">
@@ -37,7 +38,7 @@
         <div class="row justify-content-center">
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Paseword">
+                <input type="password" name="password" class="form-control lg-input" id="password" placeholder="Password">
             </div>
         </div>
         {{-- @error($e)
@@ -50,7 +51,13 @@
         </div>
     </form>
     
-    <script>
-        
-    </script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Gagal',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 </body>

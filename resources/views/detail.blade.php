@@ -61,6 +61,7 @@ dan container atas --}}
                     </div>
                 </div>
 
+
                 <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                     <form action="/upstan" id="formBacaan" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -85,6 +86,7 @@ dan container atas --}}
                                     <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
                                 </div>
                             </div>
+
                             <div class="row py-2">
                                 <h5>Stan Lalu</h5>
                                 <p>{{ $key->stanlalu }}</p>
@@ -118,6 +120,48 @@ dan container atas --}}
                                 <h5>Get Location</h5>
                             </button>
                         </div>
+                        <div class="row py-2">
+                            <h5>Stan Lalu</h5>
+                            <p>{{ $key->stanlalu }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <label for="stan" class="form-label">Stan Meter</label>
+                            <input type="text" class="form-control" name="stan" id="stan">
+                        </div>
+                        <div class="row py-2">
+                            <h5>Pakai</h5>
+                            <p>{{ $key->pakai }}</p>
+                        </div>
+                        <div class="row py-2">
+                            <label for="idcatatan" class="form-label">Catatan</label>
+                            <input type="text" class="form-control" name="idcatatan" id="idcatatan">
+                        </div>
+                        <div class="row py-2">
+                            <label for="lat" class="form-label">Latitude:</label>
+                            <input type="text" class="form-control" id="lat" name="lat" readonly>
+                        </div>
+                        <div class="row py-2">
+                            <label for="long" class="form-label">Longitude:</label>
+                            <input type="text" class="form-control" id="long" name="long" readonly>
+                        </div>
+                        <button type="button" class="btn btn-info py-2" style="color: white;" onclick="getLocation()"><h5>Get Location</h5></button>
+                    </div>
+                </form>
+            </div>
+        @endif
+    @endforeach
+
+            <p id="console"></p>
+            <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
+                <div class="row py-2">
+                    {{-- tombol untuk kembali ke list pelanggan --}}
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'"><h5>KEMBALIE</h5></button>
+                    </div>
+                    {{-- tombol untuk menyimpan perubahan --}}
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
+                    </div>
                     </form>
                 </div>
             @break
@@ -150,31 +194,32 @@ dan container atas --}}
             blah.src = URL.createObjectURL(file)
         }
     }
+        // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                // Update the form fields
-                document.getElementById('lat').value = latitude;
-                document.getElementById('long').value = longitude;
-
-                // Optionally, send the coordinates to your Laravel backend
-                // fetch('/your-laravel-route', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                //     },
-                //     body: JSON.stringify({ latitude, longitude })
-                // });
-            }, function(error) {
-                document.getElementById('console').value = error;
-            });
-        } else {
-            document.getElementById('console').value = "Geolocation is not supported by this browser.";
+                    // Update form longitude dan latitude
+                    document.getElementById('latitude').value = latitude;
+                    document.getElementById('longitude').value = longitude;
+                    
+                    // Optionally, send the coordinates to your Laravel backend
+                    // fetch('/your-laravel-route', {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    //     },
+                    //     body: JSON.stringify({ latitude, longitude })
+                    // });
+                }, function(error) {
+                    document.getElementById('console').value = error;
+                });
+            } else {
+                document.getElementById('console').value = "Geolocation is not supported by this browser.";
+            }
         }
     }
 </script>
