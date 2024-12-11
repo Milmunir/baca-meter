@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [userController::class, 'index']);
 Route::post('/login', [userController::class, 'login']);
 
+Route::get('/check', function () {
+    return response()->json([
+        'environment' => app()->environment(),
+        'debug_mode' => config('app.debug')
+    ]);
+});
+
 Route::middleware(['jwtAuth:api'])->group(function () {
     Route::get('/jalan', [Controller::class, 'getJalan']);
     Route::get('/bacaan/{jalan?}', [Controller::class, 'getJalan']);

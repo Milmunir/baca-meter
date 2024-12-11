@@ -1,4 +1,3 @@
-
 {{-- bagian main mengikuti templating yang ada di (views/template/head.blade.php) --}}
 @extends('template.head')
 @section('bodhi')
@@ -62,17 +61,7 @@ dan container atas --}}
                     </div>
                 </div>
 
-<<<<<<< HEAD
-            <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
-                <form action="" id="formBacaan">
-                    @csrf
-                    {{-- <input type="number" name="bulan" value="{{$key->bulan}}" hidden>
-                    <input type="number" name="tahun" value="{{$key->tahun}}" hidden>
-                    <input type="text" name="nosambungan" value="{{$key->nosambungan}}" hidden>
-                    <input type="number" name="pakai" value="{{$key->pakai}}" hidden>
-                    <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
-                    <div class="row py-2">
-=======
+
                 <div class="container main_container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
                     <form action="/upstan" id="formBacaan" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -80,33 +69,27 @@ dan container atas --}}
                         {{-- <input type="number" name="tahun" value="{{$key->tahun}}" hidden> --}}
                         <input type="text" name="nosambungan" value="{{ $key->nosambungan }}" hidden>
                         <input type="number" name="pakai" value="{{ $key->pakai }}" hidden>
+                        <input type="number" name="idjalan" value="{{ $key->idjalan }}" hidden>
                         {{-- <input type="number" name="pakairata" value="{{$key->pakairata}}" hidden> --}}
                         <input type="text" name="iduser" value="{{ $key->iduser }}" hidden>
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                         <div class="row py-2">
                             <div class="row py-2">
-                                <div class="row py-2 col-12  mx-auto" style="height: 256px; width: 256px;">
-                                    <img id="blah" src="#" alt="your image" />
+                                <div class="row py-2 col-12 mx-auto" style="height: 20rem">
+                                    <img id="blah" src="#" class="mh-100" style="object-fit: contain" alt="your image" />
                                 </div>
                                 <div class="row d-grid gap-2 col-12 mx-auto mt-">
+                                    {{-- bagian upload dan preview foto terhubung dengan javascript yang ada dibawah foto.onchange tiap tombol
+                                     ditekan fungsi akan langsung dijalankan --}}
                                     <label for="foto" class="btn btn-info py-2" style="color: white;">
                                         <h5>Upload Foto</h5>
                                     </label>
                                     <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
                                 </div>
                             </div>
-<<<<<<< HEAD
-                            <div class="row d-grid gap-2 col-12 mx-auto mt-">
 
-                                {{-- bagian upload dan preview foto terhubung dengan javascript yang ada dibawah foto.onchange tiap tombol
-                                ditekan fungsi akan langsung dijalankan --}}
-                                <label for="foto" class="btn btn-info py-2" style="color: white;"><h5>Upload Foto</h5></label>
-                                <input accept="image/*;capture=camera" type='file' name="foto" id="foto" style="display: none;" />
-=======
                             <div class="row py-2">
                                 <h5>Stan Lalu</h5>
                                 <p>{{ $key->stanlalu }}</p>
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                             </div>
                             <div class="row py-2">
                                 <label for="stan" class="form-label">Stan Meter</label>
@@ -118,7 +101,12 @@ dan container atas --}}
                             </div>
                             <div class="row py-2">
                                 <label for="idcatatan" class="form-label">Catatan</label>
-                                <input type="text" class="form-control" name="idcatatan" id="idcatatan">
+                                {{-- <input type="text" class="form-control" name="idcatatan" id="idcatatan"> --}}
+                                <select name="idcatatan" id="idcatatan" class="form-control">
+                                    @foreach ($catatan as $key)
+                                        <option value="{{$key->idcatatan}}">{{$key->keterangan}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="row py-2">
                                 <label for="lat" class="form-label">Latitude:</label>
@@ -132,7 +120,6 @@ dan container atas --}}
                                 <h5>Get Location</h5>
                             </button>
                         </div>
-<<<<<<< HEAD
                         <div class="row py-2">
                             <h5>Stan Lalu</h5>
                             <p>{{ $key->stanlalu }}</p>
@@ -175,9 +162,7 @@ dan container atas --}}
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <button type="button" class="btn btn-success py-2" onclick="location.href = 'main.html'"><h5>SIEMPAN</h5></button>
                     </div>
-=======
                     </form>
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
                 </div>
             @break
     @endif
@@ -186,11 +171,13 @@ dan container atas --}}
 <p id="console"></p>
 <div class="container shadow px-4 py-2 mx-1 my-2 bg-white rounded" style="cursor: pointer;">
     <div class="row py-2">
+        {{-- tombol untuk kembali ke list pelanggan --}}
         <div class="d-grid gap-2 col-6 mx-auto">
-            <button type="button" class="btn btn-danger py-2" onclick="location.href = 'main.html'">
-                <h5>KEMBALIE</h5>
+            <button type="button" class="btn btn-danger py-2" onclick="location.href = '{{ Str::before(Request::url(), '/detail')}}'">
+                <h5>KEMBALI</h5>
             </button>
         </div>
+        {{-- tombol untuk menyimpan perubahan --}}
         <div class="d-grid gap-2 col-6 mx-auto">
             <button type="submit" class="btn btn-success py-2" form="formBacaan">
                 <h5>SIEMPAN</h5>
@@ -200,24 +187,13 @@ dan container atas --}}
 </div>
 </div>
 
-<<<<<<< HEAD
-    <script>
-        foto.onchange = evt => {
-            const [file] = foto.files
-            if (file) {
-                blah.src = URL.createObjectURL(file)
-            }
-=======
 <script>
     foto.onchange = evt => {
         const [file] = foto.files
         if (file) {
             blah.src = URL.createObjectURL(file)
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
         }
     }
-
-<<<<<<< HEAD
         // fungsi js untu mendapatkan latitude dan longitude (tergantung lokasi device sekarang)
         function getLocation() {
             if (navigator.geolocation) {
@@ -244,32 +220,6 @@ dan container atas --}}
             } else {
                 document.getElementById('console').value = "Geolocation is not supported by this browser.";
             }
-=======
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-
-                // Update the form fields
-                document.getElementById('lat').value = latitude;
-                document.getElementById('long').value = longitude;
-
-                // Optionally, send the coordinates to your Laravel backend
-                // fetch('/your-laravel-route', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //         'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                //     },
-                //     body: JSON.stringify({ latitude, longitude })
-                // });
-            }, function(error) {
-                document.getElementById('console').value = error;
-            });
-        } else {
-            document.getElementById('console').value = "Geolocation is not supported by this browser.";
->>>>>>> 3eb90ae138f48b3753f20671f4cd3e8c2c83a64a
         }
     }
 </script>

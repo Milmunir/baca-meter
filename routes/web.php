@@ -18,10 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
-Route::post('/login', [userController::class, 'login']);
-Route::get('/login', [userController::class, 'login']);
+
 
 Route::middleware(['jwtAuth'])->group(function(){
+    Route::get('/', [userController::class, 'login']);
+    Route::post('/login', [userController::class, 'login']);
+    Route::get('/login', [userController::class, 'login']);
     Route::get('/bacaan/{jalan}/detail/{id?}', [Controller::class, 'getBacaan']);
     Route::get('/bacaan/{jalan}', [Controller::class, 'getBacaan']);
     Route::get('/jalan', [Controller::class, 'getJalan']);

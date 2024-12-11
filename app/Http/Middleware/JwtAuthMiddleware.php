@@ -20,15 +20,22 @@ class JwtAuthMiddleware
      */
     public function handle($request, Closure $next)
     {
+        $token = $request->header('api-key') ?? $request->cookie('access_token');
         try {
-            $token = $request->header('api-key') ?? $request->cookie('access_token');
             if (!$token) {
                 if ($request->is('api/*')) {
                     return response()->json(['error' => 'API Key not provided'], 401);
                 }
+                if ($request->is('login')) {
+                    return $next($request);
+                }
                 return redirect('login');
             }
             $user = JWTAuth::setToken($token)->getPayload();
+            if ($request->is('login')) {
+                // return response()->json(['error' => $user], 400);
+                return redirect('/jalan');
+            }
         } catch (TokenInvalidException $e) {
             return response()->json(['error' => 'Token is Invalid', 'eror' => $e], 401);
         } catch (TokenExpiredException $e) {

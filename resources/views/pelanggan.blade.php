@@ -8,6 +8,9 @@
 
 {{-- section bodhi terhubung dengan bagian template head.php dibagian body yield('bodhi') --}}
 @section('bodhi') 
+
+{{-- sama seperti bagian atas table bagian main/list jalan, hilang kalau layar diatas
+768 pixel class Jadoel nya juga sama dengan yang ada di bagian list jalan--}}
     
 {{-- sama seperti bagian atas table bagian main/list jalan, hilang kalau layar diatas
 768 pixel class Jadoel nya juga sama dengan yang ada di bagian list jalan--}}
@@ -45,6 +48,7 @@
 dipilih sebelumnya, list pelanggan dikirim dari controller fungsi getbacaan(), pelanggan
 yang ditampilkan tergantung dari jalan yang dipilih dan id pengguna aplikasi (tegantung
 siapa yang login di awal tadi) --}}
+
             @foreach ($pelanggan as $key)
                 <div class="container main_container shadow px-4 py-2 my-2 mx-sm-auto my-sm-2 px-lg-0 rounded col-12" 
                 onclick="location.href = '{{Request::url().'/detail/'.base64_encode($key->nosambungan)}}'" style="cursor: pointer;">
@@ -79,5 +83,7 @@ siapa yang login di awal tadi) --}}
     </div>
     
     
-    <script></script>
+    <script>
+    </script>
 @endsection
+

@@ -7,7 +7,6 @@
 </head>
 
 <body class="container px-5 px-xl-2 mt-5 login_container">
-    
     {{-- Bagian atas (logo dan nama aplikasi) --}}
     <div class="judul text-center">
         <div class="row rounded mx-auto d-block">
@@ -22,7 +21,6 @@
         </div>
     </div>
     
-
     {{-- Bagian form username, password, dan tombol login
     setelah tombol login ditekan  data di oper (method = POST) ke bagian user controller function login untuk dicek -
     - apakah username dan password sesuai dengan yang ada di database jika tidak maka return 401 (Unauthorized),

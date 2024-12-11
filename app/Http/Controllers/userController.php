@@ -20,7 +20,7 @@ class userController extends Controller
     public function login(Request $request)
     {
         if ($request->isMethod('get')) {
-            return view('login');
+            return view('login', ['title' => 'Login']);
         }
         try {
             $validated = $request->validate([

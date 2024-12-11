@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row my-2">
           <div class="col-4">
-            <h3 class="px-0 py-0 my-0">DELTRAS</h3>
+            <h3 class="px-0 py-0 my-0">Daftar Jalan</h3>
           </div>
 
          <div class="col-5"></div>
