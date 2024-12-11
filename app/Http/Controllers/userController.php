@@ -29,7 +29,7 @@ class userController extends Controller
             ]);
             $result = DB::select("SELECT idpembacameter,namauser,password3 FROM rekening.user WHERE idpembacameter IS NOT NULL AND namauser = '" . $validated['namauser'] . "' AND password3 = '" . $validated['password'] . "' ");
             if (!$result) {
-                return response()->json(['error' => 'Unauthorized'], 401);
+                return redirect('login')->with('error', 'Username atau Password Salah, Silahkan Login Kembali');
             }
             $payload = JWTAuth::factory()->customClaims([
                 'sub' => $result[0]->idpembacameter,  // User ID or some unique identifier

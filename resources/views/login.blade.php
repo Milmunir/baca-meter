@@ -3,9 +3,11 @@
     <link rel="stylesheet" href="{{asset('css/style_new.css')}}">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="container px-5 px-xl-2 mt-5 login_container">
+    
     {{-- Bagian atas (logo dan nama aplikasi) --}}
     <div class="judul text-center">
         <div class="row rounded mx-auto d-block">
@@ -51,7 +53,13 @@
         </div>
     </form>
     
-    <script>
-        
-    </script>
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Gagal',
+                text: '{{ session('error') }}',
+            });
+        </script>
+    @endif
 </body>
