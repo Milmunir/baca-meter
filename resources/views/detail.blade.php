@@ -160,8 +160,8 @@ dan container atas --}}
                 const longitude = position.coords.longitude;
 
                 // Update form longitude dan latitude
-                document.getElementById('latitude').value = latitude;
-                document.getElementById('longitude').value = longitude;
+                document.getElementById('lat').value = latitude;
+                document.getElementById('long').value = longitude;
 
                 // Optionally, send the coordinates to your Laravel backend
                 // fetch('/your-laravel-route', {
@@ -178,7 +178,6 @@ dan container atas --}}
         } else {
             document.getElementById('console').value = "Geolocation is not supported by this browser.";
         }
-    }
     }
 </script>
 @endsection

@@ -36,7 +36,7 @@ class Controller extends BaseController
                 'nosambungan' => 'required|string',
                 'stan' => 'required|integer',
                 'pakai' => 'required|integer',
-                'idcatatan' => 'required|integer',
+                'idcatatan' => 'required',
                 'lat' => 'required|string',
                 'long' => 'required|string',
                 'iduser' => 'required|string',
